@@ -9,8 +9,6 @@ namespace Akiba.Core
 {
     static class Utilities
     {
-        private const uint SteamApplicationIdFull = 333980;
-        private const uint SteamApplicationIdDemo = 375980;
 
         public const string GameExecutableName = "AkibaUU.exe";
         public const string ConfigExecutableName = "AkibaUU_Config.exe";
@@ -46,19 +44,9 @@ namespace Akiba.Core
             ).FirstOrDefault();
         }
 
-        public static void LaunchSteamGame(uint applicationId)
+        public static void LaunchGame()
         {
-            Process.Start(string.Format("steam://run/{0}", applicationId));
-        }
-
-        public static uint GetSteamApplicationId(Assembly assembly)
-        {
-            if (Path.GetDirectoryName(assembly.Location).ToLower().EndsWith("demo"))
-            {
-                return SteamApplicationIdDemo;
-            }
-
-            return SteamApplicationIdFull;
+            Process.Start(GameExecutableName);
         }
 
         private static int GetFramerateMemoryAddress()
@@ -67,7 +55,7 @@ namespace Akiba.Core
 
             if (systemVersion.Major == 10)
             {
-                if (GetWindowsReleaseId() >= 1809)
+                if (GetWindowsReleaseId() >= 1809)//Keep working on 1903
                 {
                     // Windows 10 (October 2018 Update)
                     return 0x0019FDEC;

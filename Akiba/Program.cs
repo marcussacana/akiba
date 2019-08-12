@@ -182,9 +182,7 @@ namespace Akiba
 
             if (gameUtility.ExitCode == (int)ExitCodes.Success)
             {
-                Utilities.LaunchSteamGame(
-                    Utilities.GetSteamApplicationId(Assembly.GetExecutingAssembly())
-                );
+                Utilities.LaunchGame();
             }
         }
 
